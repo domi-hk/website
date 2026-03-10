@@ -32,7 +32,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
 
-    <link rel="icon" type="image/x-icon" href="image/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="image/favicon.ico?v=1.0">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -67,6 +67,11 @@
             transform: translateY(-10px);
             border-color: var(--domi-red);
         }
+        @font-face {
+  font-family: 'Noto Sans TC';
+  src: url('fonts/noto-sans-v1.woff2') format('woff2');
+  font-display: swap;
+}
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -74,7 +79,7 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
                 <a href="#about" class="flex items-center">
-                    <img id="logo-img" src="image/logo320x90px.webp" alt="DoMi 多米 Logo" width="320" height="90" class="hidden h-12 md:h-14 w-auto object-contain transition-transform duration-300 hover:scale-105" onload="this.classList.remove('hidden'); document.getElementById('logo-text').classList.add('hidden');">
+                    <img id="logo-img" src="image/logo320x90px.webp?v=1.0" alt="DoMi 多米 Logo" width="320" height="90" class="hidden h-12 md:h-14 w-auto object-contain transition-transform duration-300 hover:scale-105" onload="this.classList.remove('hidden'); document.getElementById('logo-text').classList.add('hidden');">
                     <div id="logo-text" class="flex items-center space-x-2">
                         <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-[#9C1C22] rounded-full border-2 border-[#FCECB4] shadow-inner text-[#FCECB4] font-black text-lg md:text-xl italic">多</div>
                         <span class="font-black text-xl md:text-2xl text-[#9C1C22] tracking-tighter">DoMi 多米</span>
