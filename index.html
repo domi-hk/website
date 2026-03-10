@@ -31,7 +31,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
+    <style>
         :root {
             --domi-red: #9C1C22;
             --domi-pale-yellow: #FCECB4;
@@ -39,40 +39,85 @@
             --system-fonts: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
         body { 
             font-family: var(--system-fonts); 
             background-color: #FFFDF5; 
             color: #333;
             line-height: 1.5;
         }
+
         .circus-stripe {
             background: repeating-linear-gradient(45deg, var(--domi-red), var(--domi-red) 40px, var(--domi-pale-yellow) 40px, var(--domi-pale-yellow) 80px);
         }
+
         .hero-gradient {
-            /* Fixed Image Path here */
             background: linear-gradient(rgba(156, 28, 34, 0.8), rgba(252, 236, 180, 0.2)), url("image/hero.webp");
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
         }
+
         .popcorn-float {
             position: absolute;
             pointer-events: none;
             animation: float 6s infinite ease-in-out;
             z-index: 1;
         }
+
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(10deg); }
         }
+
         .card-hover:hover {
             transform: translateY(-10px);
             border-color: var(--domi-red);
         }
+
+/* Hamburger Container */
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 61; /* Above the mobile menu */
+}
+
+/* Individual Bars */
+.hamburger-btn div {
+    width: 100%;
+    height: 3px;
+    background-color: var(--domi-red);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+        /* Animation when menu is open */
+        .open .line1 {
+            transform: translateY(8.5px) rotate(45deg);
+            background-color: white; 
+        }
+        .open .line2 {
+            opacity: 0;
+        }
+        .open .line3 {
+            transform: translateY(-8.5px) rotate(-45deg);
+            background-color: white;
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
+    
     <nav class="sticky top-0 z-50 bg-white border-b-4 border-[#9C1C22] shadow-lg">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
@@ -90,16 +135,18 @@
                 <a href="#location" class="hover:underline">喺邊度？</a>
                 <a href="#contact" class="hover:underline">聯絡我們</a>
             </div>
-            <button id="menu-btn" aria-label="Open Menu" class="md:hidden text-[#9C1C22] text-2xl p-2 focus:outline-none">
-                <i class="fas fa-bars"></i>
+            <button id="menu-btn" aria-label="Menu" class="hamburger-btn md:hidden">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
             </button>
         </div>
     </nav>
 
     <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-[55] hidden opacity-0 transition-opacity duration-300"></div>
-    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-white z-[60] shadow-2xl translate-x-full md:hidden flex flex-col border-l-4 border-[#9C1C22]">
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-white z-[60] shadow-2xl translate-x-full md:hidden flex flex-col border-l-4 border-[#9C1C22] transition-transform duration-300">
         <div class="p-4 flex justify-end">
-            <button id="close-btn" aria-label="Close Menu" class="text-[#9C1C22] text-3xl p-2">&times;</button>
+            <button id="close-btn" aria-label="Close Menu" class="text-[#9C1C22] text-3xl p-2">×</button>
         </div>
         <nav class="flex flex-col space-y-6 px-8 py-4 font-black text-xl text-[#9C1C22]">
             <a href="#about" class="menu-link">關於多米</a>
@@ -115,6 +162,7 @@
     <header id="about" class="relative h-[85vh] flex items-center justify-center text-center overflow-hidden border-b-8 border-[#FCECB4]">
         <div class="absolute inset-0 circus-stripe opacity-20"></div>
         <div class="absolute inset-0 hero-gradient"></div>
+        
         <div class="popcorn-float text-5xl" style="top:20%; left:10%;">🍿</div>
         <div class="popcorn-float text-8xl" style="top:10%; left:25%; animation-delay: 1.5s;">🍿</div>
         <div class="popcorn-float text-5xl" style="top:15%; left:75%; animation-delay: 4s;">🍿</div>
@@ -130,7 +178,7 @@
             <div class="inline-block bg-[#FCECB4] text-[#9C1C22] px-4 py-1 rounded-full font-black tracking-[0.2em] mb-6 shadow-lg transform -rotate-2">COMING SOON!</div>
             <h1 class="text-5xl md:text-8xl font-black text-white mb-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)] italic uppercase">多米便利店</h1>
             <p class="text-xl md:text-3xl font-bold text-[#FCECB4] mb-10 tracking-widest drop-shadow-md">九龍城最正嘅士多就快登場！</p>
-            <a href="#location" class="bg-[#FCECB4] text-[#9C1C22] px-12 py-5 rounded-full font-black text-xl hover:scale-110 transition shadow-[0_10px_0_#9C1C22] active:shadow-none active:translate-y-2">拿拿臨去睇吓！</a>
+            <a href="#location" class="bg-[#FCECB4] text-[#9C1C22] px-12 py-5 rounded-full font-black text-xl hover:scale-110 transition shadow-[0_10px_0_#9C1C22] active:shadow-none active:translate-y-2 inline-block">拿拿臨去睇吓！</a>
         </div>
     </header>
 
@@ -140,6 +188,7 @@
                 <h2 class="text-3xl md:text-5xl font-black text-[#9C1C22] italic mb-4">多米有咩咁正？</h2>
                 <div class="h-1.5 w-24 md:w-32 bg-[#FCECB4] mx-auto rounded-full border border-[#9C1C22]"></div>
             </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
                 <div class="bg-white p-8 md:p-10 rounded-3xl border-2 border-transparent shadow-lg transition-all duration-300 card-hover">
                     <div class="text-4xl md:text-5xl mb-4 md:mb-6">⚡</div>
@@ -160,33 +209,42 @@
         </div>
     </section>
 
-    <section id="contact" class="py-20 max-w-7xl mx-auto px-4">
+    <section class="py-20 max-w-7xl mx-auto px-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div class="bg-white p-8 rounded-3xl border-4 border-[#9C1C22] shadow-2xl">
+            
+            <div id="contact" class="bg-white p-8 rounded-3xl border-4 border-[#9C1C22] shadow-2xl">
                 <h2 class="text-3xl font-black text-[#9C1C22] mb-6 italic underline decoration-[#FCECB4]">有嘢想搵我哋？</h2>
-                <form action="mailto:info@domi-hk.com" method="post" enctype="text/plain" class="space-y-4">
+                
+                <form onsubmit="event.preventDefault(); sendEmail();" class="space-y-4">
                     <div>
                         <label for="name" class="block font-bold text-sm mb-1">點稱呼你？</label>
-                        <input type="text" id="name" name="name" placeholder="例如：陳生 / Chris" required class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-[#9C1C22] outline-none">
+                        <input type="text" id="name" placeholder="例如：陳生 / Chris" required class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-[#9C1C22] outline-none">
                     </div>
                     <div>
                         <label for="email" class="block font-bold text-sm mb-1">Email</label>
-                        <input type="email" id="email" name="email" placeholder="example@gmail.com" required class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-[#9C1C22] outline-none">
+                        <input type="email" id="email" placeholder="example@gmail.com" required class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-[#9C1C22] outline-none">
                     </div>
                     <div>
                         <label for="message" class="block font-bold text-sm mb-1">想講咩？</label>
-                        <textarea id="message" name="message" rows="4" placeholder="歡迎隨時俾意見，或者話俾我哋聽你想我哋入咩貨！" class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-[#9C1C22] outline-none"></textarea>
+                        <textarea id="message" rows="4" placeholder="歡迎隨時俾意見，或者話俾我哋聽你想我哋入咩貨！" required class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-[#9C1C22] outline-none"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-[#9C1C22] text-white py-4 rounded-xl font-black text-lg hover:opacity-90 transition">即刻 Send 俾我哋</button>
+                    
+                    <button type="submit" class="w-full bg-[#9C1C22] text-white py-4 mt-2 rounded-xl font-black text-lg hover:opacity-90 transition">
+                        即刻 Send 俾我哋
+                    </button>
                 </form>
             </div>
+            
             <div id="location" class="space-y-6">
                 <h2 class="text-3xl font-black text-[#9C1C22] italic">店舖位置</h2>
                 <div class="rounded-3xl border-4 border-[#FCECB4] overflow-hidden shadow-2xl h-[400px]">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.6250079364254!2d114.18457427437933!3d22.330017479665152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3404072b15649715%3A0xecc6e6f165ff4661!2s72%20Junction%20Rd%2C%20Kowloon%20City!5e0!3m2!1sen!2shk!4v1772796163874!5m2!1sen!2shk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="店舖位置"></iframe>
                 </div>
-                <a href="https://maps.app.goo.gl/teeXMHwTY76JhSdX8" target="_blank" rel="noopener noreferrer" class="block text-center text-[#9C1C22] font-bold underline hover:text-red-600 transition">在 Google Maps 中打開 <i class="fas fa-external-link-alt ml-1"></i></a>
+                <a href="https://maps.app.goo.gl/teeXMHwTY76JhSdX8" target="_blank" rel="noopener noreferrer" class="block text-center text-[#9C1C22] font-bold underline hover:text-red-600 transition">
+                    在 Google Maps 中打開 <i class="fas fa-external-link-alt ml-1"></i>
+                </a>
             </div>
+
         </div>
     </section>
 
@@ -196,26 +254,36 @@
             <address class="not-italic font-bold mb-6">
                 <a href="mailto:info@domi-hk.com" class="hover:underline">info@domi-hk.com</a> | <a href="https://domi-hk.github.io/website/" class="hover:underline">www.domi-hk.com</a> <br> 九龍城聯合道72A地鋪
             </address>
-            <p class="text-sm opacity-80">&copy; <span id="currentYear"></span> 多米便利店 DoMi 版權所有</p>
+            <p class="text-sm opacity-80">© <span id="currentYear"></span> 多米便利店 DoMi 版權所有</p>
         </div>
     </footer>
 
-    <script defer>
+    <script>
+        // Set Current Year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile Menu Elements
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const overlay = document.getElementById('menu-overlay');
         const menuLinks = document.querySelectorAll('.menu-link');
         
+        // Toggle Menu Function
         function toggleMenu() {
             const isOpen = !mobileMenu.classList.contains('translate-x-full');
+            
+            // Toggle hamburger icon animation
+            menuBtn.classList.toggle('open'); 
+
             if (isOpen) {
+                // Close Menu
                 mobileMenu.classList.add('translate-x-full');
                 overlay.classList.add('hidden');
                 overlay.classList.remove('opacity-100');
                 document.body.style.overflow = 'auto';
             } else {
+                // Open Menu
                 mobileMenu.classList.remove('translate-x-full');
                 overlay.classList.remove('hidden');
                 setTimeout(() => overlay.classList.add('opacity-100'), 10);
@@ -223,10 +291,28 @@
             }
         }
         
+        // Event Listeners for Menu
         menuBtn.addEventListener('click', toggleMenu);
         closeBtn.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
         menuLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Email Form Function
+        function sendEmail() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Form validation is handled natively via 'required' attributes now
+            const subject = encodeURIComponent(`DoMi 多米 - 顧客查詢 (${name})`);
+            const body = encodeURIComponent(
+                `姓名: ${name}\n` +
+                `聯絡 Email: ${email}\n\n` +
+                `訊息內容:\n${message}`
+            );
+
+            window.location.href = `mailto:info@domi-hk.com?subject=${subject}&body=${body}`;
+        }
     </script>
 </body>
 </html>
